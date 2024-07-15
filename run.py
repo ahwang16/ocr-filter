@@ -4,6 +4,7 @@ from collections import namedtuple
 
 import pytesseract
 import cv2
+import sys
 
 
 Word = namedtuple("Word", "text l t r b")
@@ -36,14 +37,15 @@ def extract_text(image_path, config=r''):
 
 
 if __name__ == "__main__":
+    seg_dir = sys.argv[1]
 
     VERBOSE = False
 
-    for file in os.listdir("examples"):
+    for file in os.listdir(seg_dir):
         print("Processing file", file)
 
         # Extract text from image using default parameters
-        path = os.path.join("examples", file)
+        path = os.path.join(seg_dir, file)
         words = extract_text(path)
 
         was_padded = False
